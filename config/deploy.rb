@@ -1,14 +1,14 @@
 # config valid only for current version of Capistrano
 lock "3.9.1"
 
-set :application, "poolwatch"
+set :application, "mining-tracker"
 set :repo_url, "git@github.com:monerotools/mining-tracker.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/rails/poolwatch"
+set :deploy_to, "/home/rails/mining-tracker"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -19,7 +19,8 @@ set :deploy_to, "/home/rails/poolwatch"
 
 # Default value for :pty is false
 # set :pty, true
-
+set :rvm_ruby_version, '2.4.1'
+ 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml"
 

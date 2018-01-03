@@ -33,11 +33,11 @@ group :development do
   gem "pry-rails"
 
   gem 'capistrano'
-  gem 'capistrano-rails'
+  gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
-  gem 'capistrano-rails-collection'
+  gem 'capistrano-rake'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -58,4 +58,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "money"
 gem 'groupdate'
 gem "simple_calendar", "~> 2.0"
-
