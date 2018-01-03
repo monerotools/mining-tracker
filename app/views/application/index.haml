@@ -1,0 +1,52 @@
+.container
+  %header.header.clearfix
+    %nav
+      %ul.nav.nav-pills.float-right
+        %li.nav-item
+          %a.nav-link.active{:href => "#"}
+            XMR Tracker
+            %span.sr-only (current)
+        -# %li.nav-item
+          %a.nav-link{:href => "#"} About
+        -# %li.nav-item
+          %a.nav-link{:href => "#"} Contact
+    %h3.text-muted XMR Tracker
+  %main{:role => "main"}
+    .jumbotron
+      %h1.display-3 Track your XMR-Mining income!
+      %p.lead Don't get lost in the jungle of numbers - we make it easy for you to keep the overview.
+      %p
+        =form_tag "/start", method: :post, class: "form" do
+          .form-row
+            .col-12.col-lg-10
+              =text_field_tag :address, "", placeholder: "Your mining address", class: "form-control form-control-lg"
+            .col-12.col-lg-2
+              =submit_tag "Start tracking!", class: "btn btn-lg btn-success", role: :button
+
+      %p.text-muted
+        %br
+        If you would like to calculate your XMR income based on your hashrate, please use this calculator.
+        =link_to "https://monerotools.github.io/calculator/", "https://monerotools.github.io/calculator/", target: "_blank"
+    .row.marketing
+      .col-lg-6
+        %h4 How it works?
+        %p We just monitor the Pool-API for your mining address. Every time your balance changed, we track the change can keep overview.
+        %h4 And then?
+        %p Numbers are adding up and you have a nice overview, grouped by weeks and months.
+        %h4 For free?
+        %p Yes, absolutely. If it was useful, feel free to donate us a little bit.
+      .col-lg-6
+        %h4 Is it save?
+        %p We can only the the public data of your mining pool. Yes, that is very safe.
+        %h4 But why?
+        %p Because we also struggled to keep track. We like to make life easier. And we love open source.
+        %h4 Which pools are supported?
+        %p
+          =link_to "supportxmr.com", "http://supportxmr.com", target: "_blank"
+          is supported. more to come.
+  %p
+    %br
+    %hr
+  %footer.footer
+    %p free to use. We &hearts; monero
+    .container=render "donation"

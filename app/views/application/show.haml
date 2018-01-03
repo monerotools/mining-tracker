@@ -1,0 +1,56 @@
+-date = Date.parse(params[:start_date]) rescue Date.today
+-monthly_income = Stat.where(genesis: false).addr(@address).where(created_at: date.beginning_of_month.to_time..date.end_of_month.to_time.end_of_day).sum(:payment)
+
+-days = Stat.where(genesis: false).addr(@address).where(created_at: date.beginning_of_month.to_time..date.end_of_month.to_time.end_of_day).group_by_day(:created_at).count.size
+-days = 1 if days == 0
+
+-if params[:start] == "1"
+  .container
+    .alert.alert-success
+      %p
+        Setup was successfull. This address will be monitored.
+        To view your statistic, please bookmark this link
+        =link_to address_url(@address), address_url(@address)
+
+
+.container
+  %h2
+    .income
+      .stats
+        .cc.XMR
+        =XMR.new(monthly_income).short
+        XMR
+
+    %small.text-muted Ø #{XMR.new(monthly_income / days).short} per day
+
+
+  =month_calendar do |date|
+    .income.text-center
+      .date=date.strftime("%d. %b %Y")
+      -income = Stat.where(genesis: false).addr(@address).where(created_at: date.midnight..date.end_of_day).sum(:payment)
+      -@week_income += income
+      -next unless income > 0
+      .stats
+        .cc.XMR
+        =XMR.new(income).short
+.container
+  %p.text-muted
+    %br
+    If you would like to calculate your XMR income based on your hashrate, please use this calculator.
+    =link_to "https://monerotools.github.io/calculator/", "https://monerotools.github.io/calculator/", target: "_blank"
+.container
+  %h3 Last 50 incomes
+  %table.table.table-striped.table-sm
+    -Stat.where(genesis: false).addr(@address).order(id: :desc).limit(100).each do |stat|
+      %tr
+        -#%td=stat.id
+        %td=stat.created_at.strftime("%d.%m %Y %H:%M")
+        %td
+          .cc.XMR
+          =XMR.new(stat.payment).to_s
+        -#%td=stat.display_total
+
+
+
+.container
+  =render "donation"
